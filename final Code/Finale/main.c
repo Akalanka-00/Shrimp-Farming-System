@@ -199,25 +199,13 @@ int main(void)
 		
 		
 		//Feeding
-		if ((hourC==feedingTimes[0][0]&&minC==feedingTimes[0][1])||(hourC==feedingTimes[1][0]&&minC==feedingTimes[1][1])||(hourC==feedingTimes[2][0]&&minC==feedingTimes[2][1]))
-		{
-			feedingTimeCheckBit=1;
-			if (secC<2)
-			{
-				feedingTimeCheckBit=2;
-			}
-		}
-		
-		
-		if (feedingTimeCheckBit==2)
-		{
-			
-			PORTD&=~(1<<6);
+		if (((hourC==feedingTimes[0][0]&&minC==feedingTimes[0][1])||(hourC==feedingTimes[1][0]&&minC==feedingTimes[1][1])||(hourC==feedingTimes[2][0]&&minC==feedingTimes[2][1])) && (secC<2))
+		{PORTD&=~(1<<6);
 			LcdCommand(LCD_CLEARDISPLAY);
 			LcdSetCursor(0,0,"Feeding");
 			PORTC|=(1<<7);
 			DDRD|=(1<<7);
-
+			
 			for(uint8_t j=0;j<100;j++){
 				PORTD|=(1<<7);
 				for(uint8_t i=0;i<10;i++){
@@ -231,8 +219,8 @@ int main(void)
 					_delay_us(100);
 				}
 			}
-
-
+			
+			
 			hx=loadCellRead();
 			uint16_t weight=hx*1000;
 			_delay_ms(100);
@@ -240,18 +228,16 @@ int main(void)
 				hx=loadCellRead();
 				uint16_t weightNow=hx*1000;
 				weightNow+=feedingWeight;
-				LcdSetCursor(0,1,lcddata);
-				sprintf(0,"%04u %04u",weightNow,weight);
+				//LcdSetCursor(0,1,lcddata);
+				//sprintf(lcddata,"%04u %04u",weightNow,weight);
 				_delay_ms(100);
 				if (weightNow<=weight)
-				{
-					feedingTimeCheckBit=1;
-					break;
+				{break;
 				}
 
 			}
 			LcdCommand(LCD_CLEARDISPLAY);
-
+			
 			for(uint8_t j=0;j<100;j++){
 				
 				PORTD|=(1<<4);
@@ -266,15 +252,14 @@ int main(void)
 					_delay_us(100);
 				}
 			}_delay_ms(500);
+			
 			PORTC&=~(1<<7);
 			PORTD|=(1<<6);
 		}
-
+		
 		_delay_ms(100);
 	}
-
-			
-		}
+}
 
 
 
