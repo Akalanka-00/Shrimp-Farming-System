@@ -50,7 +50,9 @@ uint16_t foodLimit=2000;
 
 /*eeprom adress */
 uint8_t feedingdataAdress[3]={0,2,4};
+uint32_t phoneNo=0;
 #define WeightDataAdress 6
+#define PhoneNoAddress 7
 
 void adddata();
 void AddWeight();
@@ -83,6 +85,7 @@ int main(void)
 		feedingTimes[i][0]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]);
 		feedingTimes[i][1]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]+1);
 	}
+	phoneNo = eeprom_read_word((uint32_t*)PhoneNoAddress);
 	
 //	sprintf(lcddata,"%u:%u %u:%u ",feedingTimes[0][0],feedingTimes[0][1],feedingTimes[1][0],feedingTimes[1][1]);
 //	LcdSetCursor(0,0,lcddata);
@@ -324,6 +327,8 @@ uint8_t getkeyNum(){
 		
 	}//while 1
 }
+
+
 
 void setOngoingTime(){
 	LcdCommand(LCD_CLEARDISPLAY);
