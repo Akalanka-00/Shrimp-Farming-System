@@ -42,17 +42,16 @@ uint8_t feedingTimeCheckBit = 0;
 uint16_t remainFood = 0;
 
 /*#define list*/
-uint8_t lampTimes[4]={8,30,15,30};//8.30-3.30pm
+uint8_t lampTimes[4]={8,30,8,31};//8.30-3.30pm
 uint8_t tempuratureLimit[2]={10,40};
 float phLimit[2]={9.5,13.5};
 uint16_t foodLimit=2000;
 
 
-/*eeprom adress */
+/*eeprom address */
 uint8_t feedingdataAdress[3]={0,2,4};
-uint32_t phoneNo=0;
+uint8_t phoneNoAddress[11] = {7,8,9,10,11,12,13,14,15,16,17};
 #define WeightDataAdress 6
-#define PhoneNoAddress 7
 
 void adddata();
 void AddWeight();
@@ -85,7 +84,7 @@ int main(void)
 		feedingTimes[i][0]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]);
 		feedingTimes[i][1]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]+1);
 	}
-	phoneNo = eeprom_read_word((uint32_t*)PhoneNoAddress);
+	//phoneNo = eeprom_read_word((uint32_t*)PhoneNoAddress);
 	
 //	sprintf(lcddata,"%u:%u %u:%u ",feedingTimes[0][0],feedingTimes[0][1],feedingTimes[1][0],feedingTimes[1][1]);
 //	LcdSetCursor(0,0,lcddata);
@@ -126,7 +125,7 @@ int main(void)
 	}
 	DDRD|=(1<<6);
 	PORTD|=(1<<6);
-	setTime(11,20,59);
+	setTime(8,29,59);
 	
 	
 //#######################################################################################	
@@ -328,7 +327,57 @@ uint8_t getkeyNum(){
 	}//while 1
 }
 
+void addContactNo(){
+	
+	LcdCommand(LCD_CLEARDISPLAY);
+	LcdSetCursor(0,0,"Enter Contact No.");
+	_delay_ms(500);
+	uint8_t pos=0;
+	uint8_t numbers[10]={0,0,0,0,0,0,0,0,0,0};
+	uint8_t posData[10][2]={{0,9},{1,9},{2,9},{3,9},{4,9},{5,9},{6,9},{7,9},{8,9},{9,9}};
 
+
+	sprintf(lcddata,"%u%u%u%u%u%u%u%u%u%u",numbers[0],numbers[1],numbers[2],numbers[3],numbers[4],numbers[5],numbers[6],numbers[7],numbers[8],numbers[9]);
+	LcdSetCursor(0,1,lcddata);
+	LcdSetCursor(pos,1,"");
+	LcdCommand(LCD_DISPLAYCONTROL|LCD_DISPLAYON|LCD_BLINKON);
+
+	while(1){
+		uint8_t keyout=getkeyNum();
+		
+		if (keyout<=posData[pos][1])
+		{
+			numbers[pos]=keyout;
+			sprintf(lcddata,"%u%u%u%u%u%u%u%u%u%u",numbers[0],numbers[1],numbers[2],numbers[3],numbers[4],numbers[5],numbers[6],numbers[7],numbers[8],numbers[9]);
+			LcdSetCursor(0,1,lcddata);
+			pos++;
+			if (pos>10)
+			{pos=0;
+			}
+			LcdSetCursor(posData[pos][0],1,"");
+			_delay_ms(200);
+		}
+		
+		else if (keyout==14)
+		{
+			LcdCommand(LCD_CLEARDISPLAY);
+			LcdCommand(LCD_DISPLAYCONTROL|LCD_DISPLAYON|LCD_BLINKOFF);
+			LcdSetCursor(0,0,"Number Added");
+			eeprom_write_word((uint8_t*)phoneNoAddress[0],9);
+			eeprom_write_word((uint8_t*)phoneNoAddress[1],4);
+			for (int i=1; i<10;i++)
+			{
+				eeprom_write_word((uint8_t*)phoneNoAddress[i+1],numbers[i]);
+				
+			}
+			
+			
+			_delay_ms(500);
+			break;
+		}
+	}
+	
+}
 
 void setOngoingTime(){
 	LcdCommand(LCD_CLEARDISPLAY);
@@ -337,7 +386,7 @@ void setOngoingTime(){
 	
 	uint8_t pos=0;
 	uint8_t numbers[6]={0,0,0,0,0,0};
-	uint8_t posData[6][2]={{0,2},{1,9},{3,5},{4,9},{6,7},{7,9}};
+	uint8_t posData[6][2]={{0,2},{1,9},{3,5},{4,9},{6,5},{7,9}};
 	
 	
 	sprintf(lcddata,"%u%u:%u%u:%u%u",numbers[0],numbers[1],numbers[2],numbers[3],numbers[4],numbers[5]);
@@ -378,6 +427,7 @@ void setOngoingTime(){
 }
 void adddata(){
 	LcdCommand(LCD_CLEARDISPLAY);
+	addContactNo();
 	setOngoingTime();
 	LcdSetCursor(0,0,"Select Schedule");
 	uint8_t pos=0;
@@ -549,7 +599,34 @@ void Readtime(){
 	hourC=(((bit[2]&0b00110000)>>4)*10)+(bit[2]&0xF);
 }
 
+char *readPhoneNo(){
+	char *contactNo;
+	contactNo[0]="+";
+	
+	
+	for (int i=0; i<11;i++)
+	{
+		contactNo[i+1] = eeprom_read_word((uint8_t*)phoneNoAddress[i]);
+	}
+	
+	return "+";
+	//feedingWeight=eeprom_read_word((uint8_t*)WeightDataAdress);
+}
+
 void sendSMS(char*sms){
+	char str[50];
+	//char *querry = "AT+CMGS=\"%s\"",str;
+	//sprintf(str,"AT+CMGS=\"%s\"\r",readPhoneNo());
+	
+	char *contactNo;
+	contactNo[0]="+";
+	
+	
+/*	for (int i=0; i<11;i++)
+	{
+		contactNo[i+1] = eeprom_read_word((uint8_t*)phoneNoAddress[i]);
+	}*/
+	sprintf(str,"AT+CMGS=\"%s\"",contactNo);
 	
 	PORTA|=(1<<7);// buzzer
 	_delay_ms(500);
@@ -557,7 +634,8 @@ void sendSMS(char*sms){
 	_delay_ms(500);
 	USART_TxStringln("AT");
 	_delay_ms(500);
-	USART_TxStringln("AT+CMGS=\"+94710000000\"");
+	//USART_TxStringln(str);
+	USART_TxStringln("AT+CMGS=\"+3145684538546\"");
 	_delay_ms(500);
 	USART_TxStringln("AT+CMGF=1");
 	_delay_ms(500);
