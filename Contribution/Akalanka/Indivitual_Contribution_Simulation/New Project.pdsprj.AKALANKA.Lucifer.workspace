@@ -3,9 +3,9 @@
  <FRAME activewindow="0">
   <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffffaa0000000d000000d606000005040000</PLACEMENT>
   <WINDOW type="default" module="ISIS">
-   <editor metric="0" gridmajor="25400000" mode="00000000" zoom="-1" scale="78" flipped="0" gridminor="508000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="162820">
+   <editor metric="0" gridmajor="2540000" mode="00000000" zoom="-1" scale="109" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="127000">
     <world y1="-8890000" x1="-12700000" y2="8890000" x2="12700000"/>
-    <centre x="6350000" y="-11176000"/>
+    <centre x="5977156" y="-3714459"/>
     <origin x="0" y="0"/>
    </editor>
   </WINDOW>
@@ -18,9 +18,9 @@
   </editor>
  </MODULE>
  <MODULE name="ISIS">
-  <editor metric="0" gridmajor="25400000" mode="00000000" zoom="-1" scale="78" flipped="0" gridminor="508000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="162820">
+  <editor metric="0" gridmajor="2540000" mode="00000000" zoom="-1" scale="109" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="127000">
    <world y1="-8890000" x1="-12700000" y2="8890000" x2="12700000"/>
-   <centre x="6350000" y="-11176000"/>
+   <centre x="5977156" y="-3714459"/>
    <origin x="0" y="0"/>
   </editor>
  </MODULE>
@@ -52,13 +52,13 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="88" flags="00000023" y="200" h="250" pid="0" iid="10">
+   <POPUP w="450" x="49" flags="00008023" y="236" h="250" pid="0" iid="10">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="108" flags="00000023" y="220" h="250" pid="0" iid="11">
+   <POPUP w="450" x="143" flags="00000023" y="569" h="250" pid="0" iid="11">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
