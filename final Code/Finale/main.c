@@ -125,7 +125,7 @@ int main(void)
 	}
 	DDRD|=(1<<6);
 	PORTD|=(1<<6);
-	setTime(8,29,59);
+	setTime(11,20,59);
 	
 	
 //#######################################################################################	
@@ -215,7 +215,7 @@ int main(void)
 				}
 				PORTD&=~(1<<7);
 				
-				uint8_t ser=200-10;
+				uint8_t ser=20;
 				
 				for(uint8_t i=0;i<ser;i++){
 					_delay_us(100);
@@ -243,14 +243,14 @@ int main(void)
 			for(uint8_t j=0;j<100;j++){
 				
 				PORTD|=(1<<4);
-				for(uint8_t i=0;i<15;i++){
+				for(uint8_t i=0;i<9;i++){
 					_delay_us(100);
 				}
 				PORTD&=~(1<<4);
 				
 				uint8_t ser=200-15;
 				
-				for(uint8_t i=0;i<15;i++){
+				for(uint8_t i=0;i<9;i++){
 					_delay_us(100);
 				}
 			}_delay_ms(500);
@@ -427,8 +427,8 @@ void setOngoingTime(){
 }
 void adddata(){
 	LcdCommand(LCD_CLEARDISPLAY);
-	addContactNo();
-	setOngoingTime();
+	//addContactNo();
+	//setOngoingTime();
 	LcdSetCursor(0,0,"Select Schedule");
 	uint8_t pos=0;
 	char*text[4]={"Feeding time 1","Feeding time 2","Feeding time 3","Food weight    "};
