@@ -123,12 +123,13 @@ int main(void)
 		
 		if (key==2)
 		{	LcdCommand(LCD_CLEARDISPLAY);
+			setTime(11,20,59);
 			break;
 		}
 	}
 	DDRD|=(1<<6);
 	PORTD|=(1<<6);
-	setTime(11,20,59);
+	
 	
 	
 //#######################################################################################	
@@ -213,14 +214,26 @@ int main(void)
 			
 			for(uint8_t j=0;j<100;j++){
 				PORTD|=(1<<7);
-				for(uint8_t i=0;i<10;i++){
+				for(uint8_t i=0;i<9;i++){
 					_delay_us(100);
 				}
 				PORTD&=~(1<<7);
 				
-				uint8_t ser=20;
 				
-				for(uint8_t i=0;i<ser;i++){
+				for(uint8_t i=0;i<9;i++){
+					_delay_us(100);
+				}
+			}
+			
+			for(uint8_t j=0;j<100;j++){
+				PORTD|=(1<<7);
+				for(uint8_t i=0;i<20;i++){
+					_delay_us(100);
+				}
+				PORTD&=~(1<<7);
+				
+				
+				for(uint8_t i=0;i<20;i++){
 					_delay_us(100);
 				}
 			}
@@ -243,19 +256,19 @@ int main(void)
 			}
 			LcdCommand(LCD_CLEARDISPLAY);
 			
+			_delay_ms(1000);
 			for(uint8_t j=0;j<100;j++){
-				
-				PORTD|=(1<<4);
+				PORTD|=(1<<7);
 				for(uint8_t i=0;i<9;i++){
 					_delay_us(100);
 				}
-				PORTD&=~(1<<4);
+				PORTD&=~(1<<7);
 				
-				uint8_t ser=200-15;
 				
 				for(uint8_t i=0;i<9;i++){
 					_delay_us(100);
 				}
+			}
 			}_delay_ms(500);
 			
 			PORTC&=~(1<<7);
@@ -264,7 +277,7 @@ int main(void)
 		
 		_delay_ms(100);
 	}
-}
+
 
 
 
