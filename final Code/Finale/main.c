@@ -44,13 +44,14 @@ uint16_t remainFood = 0;
 /*#define list*/
 uint8_t lampTimes[4]={8,30,8,31};//8.30-3.30pm
 uint8_t tempuratureLimit[2]={10,40};
-float phLimit[2]={9.5,13.5};
+float phLimit[2]={5,9};
 uint16_t foodLimit=2000;
 
 
 /*eeprom address */
 uint8_t feedingdataAdress[3]={0,2,4};
 uint8_t phoneNoAddress[11] = {7,8,9,10,11,12,13,14,15,16,17};
+char *phoneNo;
 #define WeightDataAdress 6
 
 void adddata();
@@ -84,6 +85,8 @@ int main(void)
 		feedingTimes[i][0]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]);
 		feedingTimes[i][1]=eeprom_read_byte((uint8_t*)feedingdataAdress[i]+1);
 	}
+	
+	//phoneNo = readPhoneNo();
 	//phoneNo = eeprom_read_word((uint32_t*)PhoneNoAddress);
 	
 //	sprintf(lcddata,"%u:%u %u:%u ",feedingTimes[0][0],feedingTimes[0][1],feedingTimes[1][0],feedingTimes[1][1]);
@@ -427,8 +430,9 @@ void setOngoingTime(){
 }
 void adddata(){
 	LcdCommand(LCD_CLEARDISPLAY);
+	
+	setOngoingTime();
 	//addContactNo();
-	//setOngoingTime();
 	LcdSetCursor(0,0,"Select Schedule");
 	uint8_t pos=0;
 	char*text[4]={"Feeding time 1","Feeding time 2","Feeding time 3","Food weight    "};
@@ -635,7 +639,7 @@ void sendSMS(char*sms){
 	USART_TxStringln("AT");
 	_delay_ms(500);
 	//USART_TxStringln(str);
-	USART_TxStringln("AT+CMGS=\"+3145684538546\"");
+	USART_TxStringln("AT+CMGS=\"+947672323154\"");
 	_delay_ms(500);
 	USART_TxStringln("AT+CMGF=1");
 	_delay_ms(500);
