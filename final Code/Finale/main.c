@@ -645,7 +645,9 @@ void sendSMS(char*sms){
 	}*/
 	sprintf(str,"AT+CMGS=\"%s\"",contactNo);
 	
+	DDRA|=(1<<7);//buzzer
 	PORTA|=(1<<7);// buzzer
+	
 	_delay_ms(500);
 	USART_TxStringln("AT");
 	_delay_ms(500);
