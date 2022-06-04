@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'PCF8574N'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Texas Instruments", "PCF8574N" (!) = "", "DIP794W53P254L1930H508Q16N", "Dual-In-Line Packages", "595-PCF8574N", "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/PCF8574N?qs=L5CvrNUdZirGmsfmc3baKQ%3D%3D", "PCF8574N", "https://www.arrow.com/en/products/pcf8574n/texas-instruments", "REMOTE 8-BIT I/O EXPANDER FOR I2C BUS", "http://componentsearchengine.com/Datasheets/3/PCF8574N.pdf", "5.08 mm"
+END_PART
+
+END.

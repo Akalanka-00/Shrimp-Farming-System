@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "PCF8574N"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2019-09-11-04:50:48)
+    (mountForm default
+        (footprintRef "DIP794W53P254L1930H508Q16N")
+        (spec "System")
+    )
+)

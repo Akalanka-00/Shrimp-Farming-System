@@ -1,0 +1,9 @@
+Manufacturer=Texas Instruments
+PartNumber=PCF8574N
+PartCategory=Integrated Circuit
+PackageCategory=Dual-In-Line Packages
+PinCount=16
+Version=4.1
+Released=2017-01-12 12:59:53
+Downloaded=2022-06-04 12:43:09
+3D=Y

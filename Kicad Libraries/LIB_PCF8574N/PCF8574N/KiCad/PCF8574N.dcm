@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP PCF8574N
+D REMOTE 8-BIT I/O EXPANDER FOR I2C BUS
+K
+F http://componentsearchengine.com/Datasheets/3/PCF8574N.pdf
+$ENDCMP
+#
+#End Doc Library
