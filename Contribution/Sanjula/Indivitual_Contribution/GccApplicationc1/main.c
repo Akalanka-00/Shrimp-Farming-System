@@ -3,7 +3,7 @@
 #include <util/delay.h> //Delay library
 
 uint8_t hx711H=0; //Load Scale High Bits     
-uint16_t hx711L=0;//Load Scale Low Bits       //HX711 generate 24 bit output  //Hx711 has CLK & Data signal. When we supply to 24 bit CLK signal, according to that 24 bit data signal will generate
+uint16_t hx711L=0;//Load Scale Low Bits       
 float loadCellRead(); //define function
 #define Load_data 2
 #define Load_clk 3
@@ -27,21 +27,21 @@ int main(void)
 		{PORTC|=(1<<5);MotorControl(1);   //Port C 5 pin ON (buzzer)   //And give to MotorControl function = 1
 		}
 		else
-		{PORTC&=~(1<<5);MotorControl(0);  ////Port C 5 pin OFF (buzzer)   ////And give to MotorControl function = 0
+		{PORTC&=~(1<<5);MotorControl(0);  ////Port C 5 pin OFF (buzzer)   //And give to MotorControl function = 0
 		}
 		_delay_ms(100);
 	}
 }
 
-void MotorControl(uint8_t dir){     //pass MotorControl value to dir 
+void MotorControl(uint8_t dir){     
 	
-	if (dir)  //If MotorControl = 1,Do this
-	{PORTC|=(1<<MotorCCW);   //portC2 on 
-		PORTC&=~(1<<MotorCw); //portC3 off
+	if (dir)  
+	{PORTC|=(1<<MotorCCW);   
+		PORTC&=~(1<<MotorCw); 
 	}
 	else
-	{PORTC|=(1<<MotorCw); //portC3 on 
-		PORTC&=~(1<<MotorCCW); //portC2 off 
+	{PORTC|=(1<<MotorCw); 
+		PORTC&=~(1<<MotorCCW); 
 	}
 }
 
@@ -50,8 +50,8 @@ float loadCellRead(){
 	for(uint8_t i=0;i<8;i++){  // Load cell data high 8 bits
 		PORTD|=(1<<Load_clk); //Clock pin high
 		_delay_us(10);
-		if ((PIND&(1<<Load_data))>>Load_data)  //read data pin  ////Read D2 pin
-		{hx711H|=(1<<(7-i));//set hx 711 variable  ////hx711H variable bit high
+		if ((PIND&(1<<Load_data))>>Load_data)  //read data pin  
+		{hx711H|=(1<<(7-i));//set hx 711 variable  
 		}
 		else
 		{hx711H&=~(1<<(7-i));   //hx711H variable bit low
@@ -61,7 +61,7 @@ float loadCellRead(){
 	}
 	
 	
-	for(uint8_t i=0;i<16;i++){ // Load cell data low 16 bits    //Do the same process for 16 bit   //Most important thing is that we can't do it together(16bit & 8bit) cause  there isn't enough memmory for this IC
+	for(uint8_t i=0;i<16;i++){ // Load cell data low 16 bits   
 		PORTD|=(1<<Load_clk); //Clock pin high
 		_delay_us(10);
 		if ((PIND&(1<<Load_data))>>Load_data) //read data pin  
@@ -74,7 +74,7 @@ float loadCellRead(){
 		_delay_us(5);
 	}
 	
-	hx711L=hx711L>>1; //shift bits      //After this we make our 8 bit & 16 bit values to one line 
+	hx711L=hx711L>>1; //shift bits      
 	
 	if (hx711H&1)  //bit setup
 	{hx711L|=(1<<15);
