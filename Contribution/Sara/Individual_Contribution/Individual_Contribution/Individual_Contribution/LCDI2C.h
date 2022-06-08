@@ -2,7 +2,7 @@
  * _1602LCDI2C.h
  *
  * Created: 5/16/2020 12:32:15 AM
- *  Author: Dilan
+ *  Author: Lucifer
  */ 
 
 
