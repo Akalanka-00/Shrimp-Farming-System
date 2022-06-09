@@ -1,0 +1,8 @@
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-F_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-In1_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-In2_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-B_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-F_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-In1_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-In2_Cu.svg'.
+Exported 'D:\Projects\kicat\GSM_LCD_RTC\output\GSM_LCD_RTC-B_Cu.svg'.
