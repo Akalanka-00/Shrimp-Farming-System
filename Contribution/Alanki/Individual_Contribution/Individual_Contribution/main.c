@@ -7,7 +7,7 @@ const uint8_t kaypad[4][4]={{7,8,9,10},{4,5,6,11},{1,2,3,12},{13,0,14,15}};
 uint8_t getkeyNum();
 
 uint16_t ReadADC(uint8_t ADCchannel);
-float ph=0;
+float ph=0.0;
 char lcddata[20];
 int main(void)
 {
@@ -18,8 +18,10 @@ int main(void)
 	LcdSetCursor(0,0,"Wait . . .");
 	_delay_ms(1000);
 	LcdCommand(LCD_CLEARDISPLAY);
+	ADMUX = (1<<REFS0);		
 	ph=ReadADC(0)*5.0/1024;
-	sprintf(lcddata,"%0.2f",ph*3.5);
+	ph= ph*3.5;
+	sprintf(lcddata,"%0.1f",ph);
 	LcdSetCursor(0,0,lcddata);
 	DDRD=0b1;
 	while (1)
